@@ -24,14 +24,14 @@ custom:
 
 functions:
     create:
-        handler: src/handlers/create.handler
+        handler: src/handlers/users/create.handler
         events:
             - http:
                   path: /create
                   method: post
 
     view:
-        handler: src/handlers/view.handler
+        handler: src/handlers/users/view.handler
         events:
             - http:
                   path: /view

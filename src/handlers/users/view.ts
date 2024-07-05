@@ -1,5 +1,5 @@
 import type { APIGatewayProxyStructuredResultV2, Handler } from 'aws-lambda';
-import Users from '../models/user';
+import Users from '../../models/user';
 
 export const handler: Handler =
     async (): Promise<APIGatewayProxyStructuredResultV2> => {
