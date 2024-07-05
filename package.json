@@ -1,0 +1,31 @@
+{
+    "dependencies": {
+        "@aws-sdk/credential-provider-node": "^3.540.0",
+        "@aws-sdk/rds-signer": "^3.540.0",
+        "jsonwebtoken": "^9.0.2",
+        "mysql2": "^3.10.1",
+        "pg": "^8.11.4",
+        "pg-hstore": "^2.3.4",
+        "sequelize": "^6.37.2",
+        "serverless-domain-manager": "^7.3.8",
+        "serverless-prune-versions": "^1.0.4"
+    },
+    "devDependencies": {
+        "@serverless/typescript": "^3.38.0",
+        "@types/aws-lambda": "^8.10.136",
+        "@types/jsonwebtoken": "^9.0.6",
+        "@types/node": "^20.12.2",
+        "@types/pg": "^8.11.4",
+        "esbuild": "^0.20.2",
+        "glob": "^10.3.12",
+        "nodemon": "^3.1.0",
+        "serverless": "^3.38.0",
+        "serverless-esbuild": "^1.52.1",
+        "serverless-offline": "^13.3.3",
+        "tsx": "^4.7.1",
+        "typescript": "^5.4.3"
+    },
+    "scripts": {
+        "dev": "nodemon --ext ts,js,mjs,cjs,json --exec serverless offline --httpPort 3001"
+    }
+}

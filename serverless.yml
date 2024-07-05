@@ -1,0 +1,38 @@
+service: project-service
+frameworkVersion: '3'
+
+provider:
+    name: aws
+    runtime: nodejs18.x
+    timeout: 30
+    environment:
+        DB_HOST: localhost
+        DB_NAME: serverless-prac
+        DB_USER: postgres
+        DB_PASSWORD: admin
+        port: 5432
+
+plugins:
+    - serverless-prune-versions
+    - serverless-esbuild
+    - serverless-offline
+
+custom:
+    prune:
+        automatic: true
+        number: 3
+
+functions:
+    create:
+        handler: src/handlers/create.handler
+        events:
+            - http:
+                  path: /create
+                  method: post
+
+    view:
+        handler: src/handlers/view.handler
+        events:
+            - http:
+                  path: /view
+                  method: get
