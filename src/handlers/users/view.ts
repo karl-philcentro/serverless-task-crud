@@ -1,12 +1,10 @@
 import type { APIGatewayProxyStructuredResultV2, Handler } from 'aws-lambda';
-import Users from '../../models/user';
+import db from "../../db/initDB"
 
 export const handler: Handler =
     async (): Promise<APIGatewayProxyStructuredResultV2> => {
 
-        const useLists = await Users.findAll({
-           
-        });
+        const useLists = await db.User.findAll({});
 
         return {
             statusCode: 200,

@@ -4,16 +4,17 @@ import type {
     Handler,
 } from 'aws-lambda';
 
-import Users from '../../models/user';
+import db from "../../db/initDB"
 
 export const handler: Handler = async (
     event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyStructuredResultV2> => {
 
-    const { name } = JSON.parse(event.body);
+    const { name, email} = JSON.parse(event.body);
 
-    await Users.create({
+    await db.User.create({
         name,
+        email,
     });
 
     return {

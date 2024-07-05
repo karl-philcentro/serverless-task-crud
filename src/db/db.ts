@@ -8,16 +8,5 @@ const sequelize = new Sequelize({
     port: 5432, // PostgreSQL default port
     dialect: 'postgres', // Specify the dialect of the database
   });
-
-sequelize.authenticate()
-  .then(async () => {
-    console.log('Connection has been established successfully.');
-    // Synchronize all models
-    await sequelize.sync({ alter: true }); // Use alter: true to update tables to match the models
-    console.log('All models were synchronized successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
+  
   export default sequelize;

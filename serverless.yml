@@ -7,9 +7,9 @@ provider:
     timeout: 30
     environment:
         DB_HOST: localhost
-        DB_NAME: serverless-prac
+        DB_NAME: serverless-bookrenting-crud
         DB_USER: postgres
-        DB_PASSWORD: admin
+        DB_PASSWORD: password
         port: 5432
 
 plugins:
