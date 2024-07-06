@@ -30,7 +30,12 @@ functions:
             - http:
                   path: /create-user
                   method: post
-
+    viewUserProfile:
+        handler: src/handlers/users/viewUserProfile.handler
+        events:
+            - http:
+                path: /view-user/{id}
+                method: get
     view:
         handler: src/handlers/users/viewUsers.handler
         events:
@@ -77,3 +82,17 @@ functions:
             - http:
                 path: /delete-book/{id}
                 method: delete
+
+    # Renting functions ------------------------------------------------------------
+    rentBook:
+        handler: src/handlers/renting/rentBook.handler
+        events:
+            - http:
+                path: /rent-book
+                method: post
+    viewRent:
+        handler: src/handlers/renting/viewRent.handler
+        events:
+            - http:
+                path: /view-rent
+                method: get

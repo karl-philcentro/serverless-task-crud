@@ -15,7 +15,7 @@ export const handler:Handler = async (
         const new_book = await db.Book.create({ title, description, author });
 
         return {
-            statusCode: 200,
+            statusCode: 201,
             body: JSON.stringify(new_book),
     };
     } catch (error) {
