@@ -1,11 +1,15 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../db/db";
 
+import Book from "./book";
+
 interface RentalHistoryEntry {
     rentedBookId: number;
     bookId: number;
     dateRented: Date;
     returnDate?: Date;
+
+    Book?: { title: string };
 }
 
 interface UserAttributes {
@@ -26,6 +30,41 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public rentalHistory!: RentalHistoryEntry[];
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // Getter for currently rented books with titles
+  public get activeRentals(): Promise<RentalHistoryEntry[]> {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const currentDate = new Date();
+            const rentedBooks: RentalHistoryEntry[] = this.rentalHistory
+                .filter(entry => !entry.returnDate || entry.returnDate > currentDate);
+
+            // Fetch Book titles asynchronously
+            await Promise.all(rentedBooks.map(async (entry) => {
+                if (entry.bookId) {
+                    const book = await Book.findByPk(entry.bookId);
+                    if (book) {
+                        entry.Book = { title: book.title };
+                    }
+                }
+            }));
+
+            // Map to format the result with book titles
+            const formattedRentedBooks = rentedBooks.map(entry => ({
+                rentedBookId: entry.rentedBookId,
+                bookId: entry.bookId,
+                title: entry.Book ? entry.Book.title : '',
+                dateRented: entry.dateRented,
+            }));
+
+            resolve(formattedRentedBooks);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+
 }
 
 User.init({

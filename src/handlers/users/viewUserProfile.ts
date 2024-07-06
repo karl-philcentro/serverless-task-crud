@@ -8,10 +8,17 @@ export const handler: Handler =
 
             const user = await db.User.findByPk(id); 
 
+            const currentRentals = await user.activeRentals
+
             return {
                 statusCode: 200,
                 body: JSON.stringify({
-                    data: user
+                    data: {
+                        id: user.id,
+                        email: user.email,
+                        role: user.role,
+                        activeRentals: currentRentals
+                    }
                 }),
             };
         } catch (error) {

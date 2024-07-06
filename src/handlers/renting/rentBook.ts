@@ -30,6 +30,25 @@ export const handler:Handler = async (
             };
         }
 
+        const rentedBooks = await user.activeRentals;
+
+        if(user.role === 'regular' && user.rentalHistory.length >= 2 || user.role === 'premium' && user.rentalHistory.length >= 5) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ 
+                    message: "User has reached the maximum number of books that can be rented", 
+                    rentedBooks
+                }),
+            };
+        }
+
+        if (book.quantity === 0) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ message: "The book is currently out of stock."}),
+            };
+        }
+
         const rented_book = await db.RentedBook.create({ userId, bookId});
 
         const rentalHistory = [...user.rentalHistory]
