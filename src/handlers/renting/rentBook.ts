@@ -59,6 +59,8 @@ export const handler:Handler = async (
             dateRented: rented_book.dateRented,
         });
 
+        await book.update({ quantity: book.quantity - 1 });
+
         await user.update({ rentalHistory });
 
         return {

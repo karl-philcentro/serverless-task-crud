@@ -23,11 +23,24 @@ export const handler: Handler = async (
             };
         }
 
+        const rentedBooks = await db.RentedBook.findAll({ where: { bookId: id } });
+
+        // Delete the book from the rental history of all users
+        for (const rentedBook of rentedBooks) {
+            const user = await db.User.findByPk(rentedBook.userId);
+            if(user) {
+                // Remove the rental history entry in the user's rental history
+                const updateRentalHistory = user.rentalHistory.filter(entry => entry.rentedBookId !== rentedBook.id);
+                await user.update({ rentalHistory: updateRentalHistory })
+            }
+        }
+
+        // Delete the book
         await book.destroy();
 
         return {
             statusCode: 200,
-            body: JSON.stringify(book),
+            body: JSON.stringify({ message: "Book and related rental history deleted" }),
         };
     } catch (error) {
         return {

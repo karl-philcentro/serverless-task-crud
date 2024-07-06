@@ -55,6 +55,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
                 bookId: entry.bookId,
                 title: entry.Book ? entry.Book.title : '',
                 dateRented: entry.dateRented,
+                returnDate: entry.returnDate ? entry.returnDate : null,
             }));
 
             resolve(formattedRentedBooks);

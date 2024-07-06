@@ -96,3 +96,15 @@ functions:
             - http:
                 path: /view-rent
                 method: get
+    returnBook:
+        handler: src/handlers/renting/returnBook.handler
+        events:
+            - http:
+                path: /return-book/{rentalId}
+                method: patch
+    deleteRenting:
+        handler: src/handlers/renting/deleteRenting.handler
+        events:
+            - http:
+                path: /delete-renting/{rentalId}
+                method: delete
