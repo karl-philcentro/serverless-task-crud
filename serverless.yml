@@ -23,16 +23,57 @@ custom:
         number: 3
 
 functions:
+    # Users functions ------------------------------------------------------------
     create:
-        handler: src/handlers/users/create.handler
+        handler: src/handlers/users/createUser.handler
         events:
             - http:
-                  path: /create
+                  path: /create-user
                   method: post
 
     view:
-        handler: src/handlers/users/view.handler
+        handler: src/handlers/users/viewUsers.handler
         events:
             - http:
-                  path: /view
+                  path: /view-users
                   method: get
+
+    updateUser:
+        handler: src/handlers/users/updateUser.handler
+        events:
+            - http:
+                path: /update-user/{id}
+                method: patch
+
+    deleteUser:
+        handler: src/handlers/users/deleteUser.handler
+        events:
+            - http:
+                path: /delete-user/{id}
+                method: delete
+
+    # Books functions ------------------------------------------------------------
+    createBook:
+        handler: src/handlers/books/createBook.handler
+        events:
+            - http:
+                path: /create-book
+                method: post
+    viewBooks:
+        handler: src/handlers/books/viewBooks.handler
+        events:
+            - http:
+                path: /view-books
+                method: get
+    updateBook:
+        handler: src/handlers/books/updateBook.handler
+        events:
+            - http:
+                path: /update-book/{id}
+                method: patch
+    deleteBook:
+        handler: src/handlers/books/deleteBook.handler
+        events:
+            - http:
+                path: /delete-book/{id}
+                method: delete

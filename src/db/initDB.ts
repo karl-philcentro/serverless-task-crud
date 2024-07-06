@@ -5,10 +5,10 @@ import Book from './../models/book';
 import RentedBook from './../models/rentedBook';
 
 // Define associations
-User.hasMany(RentedBook, { foreignKey: 'userId' });
-Book.hasMany(RentedBook, { foreignKey: 'bookId' });
-RentedBook.belongsTo(User, { foreignKey: 'userId' });
-RentedBook.belongsTo(Book, { foreignKey: 'bookId' });
+User.hasMany(RentedBook, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Book.hasMany(RentedBook, { foreignKey: 'bookId', onDelete: 'CASCADE'});
+RentedBook.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE'});
+RentedBook.belongsTo(Book, { foreignKey: 'bookId', onDelete: 'CASCADE'});
 
 const db = {
   sequelize,
