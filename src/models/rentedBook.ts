@@ -1,12 +1,17 @@
 import { DataTypes, Sequelize, Model, Optional } from "sequelize";
 import sequelize from "../db/db";
 
+import User from "./user";
+import Book from "./book";
+
 interface RentedBookAttributes {
     id?: number;
     userId: number;
     bookId: number;
     dateRented: Date;
     returnDate?: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
   }
 
   interface RentedBookCreationAttributes extends Optional<RentedBookAttributes, 'id' | 'returnDate'> {}
@@ -17,6 +22,11 @@ class RentedBook extends Model<RentedBookAttributes, RentedBookCreationAttribute
   public bookId!: number;
   public dateRented!: Date;
   public returnDate?: Date;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+
+  public User?: User;
+  public Book?: Book;
 }
 
 RentedBook.init({

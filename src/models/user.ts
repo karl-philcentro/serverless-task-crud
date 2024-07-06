@@ -24,6 +24,8 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public email!: string;
   public role!: 'regular' | 'premium' | 'VIP';
   public rentalHistory!: RentalHistoryEntry[];
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 User.init({

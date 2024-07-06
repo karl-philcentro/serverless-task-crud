@@ -9,7 +9,7 @@ interface BookAttributes {
     quantity: number;
   }
 
-  interface BookCreationAttributes extends Optional<BookAttributes, 'id'> {}
+interface BookCreationAttributes extends Optional<BookAttributes, 'id'> {}
 
 class Book extends Model<BookAttributes, BookCreationAttributes> implements BookAttributes {
   public id!: number;
@@ -17,6 +17,8 @@ class Book extends Model<BookAttributes, BookCreationAttributes> implements Book
   public title!: string;
   public description!: string;
   public quantity!: number;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 Book.init({
