@@ -12,6 +12,17 @@ export const handler:Handler = async (
     try {
         const { title, description, author} = JSON.parse(event.body);
 
+        const existing_book = await db.Book.findOne({
+            where: { title },
+        });
+
+        if (existing_book) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ message: "Book already exists" }),
+            };
+        }
+    
         const new_book = await db.Book.create({ title, description, author });
 
         return {

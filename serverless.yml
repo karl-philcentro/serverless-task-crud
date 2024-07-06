@@ -69,7 +69,7 @@ functions:
         events:
             - http:
                 path: /view-books
-                method: get
+                method: post
     updateBook:
         handler: src/handlers/books/updateBook.handler
         events:
