@@ -10,11 +10,12 @@ export const handler: Handler = async (
     event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyStructuredResultV2> => {
     try {
-        const { name, email} = JSON.parse(event.body);
+        const { name, email, role} = JSON.parse(event.body);
 
         const new_user = await db.User.create({
             name,
             email,
+            role
         });
 
         return {

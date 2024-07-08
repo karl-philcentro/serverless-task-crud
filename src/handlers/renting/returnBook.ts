@@ -11,8 +11,7 @@ export const handler: Handler = async (event: APIGatewayProxyEventV2): Promise<A
         const { rentalId } = event.pathParameters
 
         const rentedBook = await db.RentedBook.findByPk(rentalId);
-        const user = await db.User.findByPk(rentedBook.userId);
-
+        
         if (!rentedBook) {
             return {
                 statusCode: 404,
@@ -22,6 +21,16 @@ export const handler: Handler = async (event: APIGatewayProxyEventV2): Promise<A
             };
         }
 
+        if (rentedBook.returnDate) {
+            return {
+                statusCode: 404,
+                body: JSON.stringify({
+                    message: "Already returned.",
+                }),
+            };
+        }
+        
+        const user = await db.User.findByPk(rentedBook.userId);
         const updatedBook = await db.Book.findByPk(rentedBook.bookId)
 
         await updatedBook.update({

@@ -6,10 +6,15 @@ provider:
     runtime: nodejs18.x
     timeout: 30
     environment:
+        # DB_HOST: localhost
+        # DB_NAME: serverless-bookrenting-crud
+        # DB_USER: postgres
+        # DB_PASSWORD: password
+        # port: 5432
         DB_HOST: localhost
-        DB_NAME: serverless-bookrenting-crud
+        DB_NAME: serverless-prac
         DB_USER: postgres
-        DB_PASSWORD: password
+        DB_PASSWORD: admin
         port: 5432
 
 plugins:
@@ -34,8 +39,8 @@ functions:
         handler: src/handlers/users/viewUserProfile.handler
         events:
             - http:
-                path: /view-user/{id}
-                method: get
+                  path: /view-user/{id}
+                  method: get
     view:
         handler: src/handlers/users/viewUsers.handler
         events:
@@ -47,64 +52,64 @@ functions:
         handler: src/handlers/users/updateUser.handler
         events:
             - http:
-                path: /update-user/{id}
-                method: patch
+                  path: /update-user/{id}
+                  method: patch
 
     deleteUser:
         handler: src/handlers/users/deleteUser.handler
         events:
             - http:
-                path: /delete-user/{id}
-                method: delete
+                  path: /delete-user/{id}
+                  method: delete
 
     # Books functions ------------------------------------------------------------
     createBook:
         handler: src/handlers/books/createBook.handler
         events:
             - http:
-                path: /create-book
-                method: post
+                  path: /create-book
+                  method: post
     viewBooks:
         handler: src/handlers/books/viewBooks.handler
         events:
             - http:
-                path: /view-books
-                method: post
+                  path: /view-books
+                  method: post
     updateBook:
         handler: src/handlers/books/updateBook.handler
         events:
             - http:
-                path: /update-book/{id}
-                method: patch
+                  path: /update-book/{id}
+                  method: patch
     deleteBook:
         handler: src/handlers/books/deleteBook.handler
         events:
             - http:
-                path: /delete-book/{id}
-                method: delete
+                  path: /delete-book/{id}
+                  method: delete
 
     # Renting functions ------------------------------------------------------------
     rentBook:
         handler: src/handlers/renting/rentBook.handler
         events:
             - http:
-                path: /rent-book
-                method: post
+                  path: /rent-book
+                  method: post
     viewRent:
         handler: src/handlers/renting/viewRent.handler
         events:
             - http:
-                path: /view-rent
-                method: get
+                  path: /view-rent
+                  method: get
     returnBook:
         handler: src/handlers/renting/returnBook.handler
         events:
             - http:
-                path: /return-book/{rentalId}
-                method: patch
+                  path: /return-book/{rentalId}
+                  method: patch
     deleteRenting:
         handler: src/handlers/renting/deleteRenting.handler
         events:
             - http:
-                path: /delete-renting/{rentalId}
-                method: delete
+                  path: /delete-renting/{rentalId}
+                  method: delete
